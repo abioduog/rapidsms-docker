@@ -30,6 +30,9 @@ git commit -m "Initial commit"
 git remote remove origin
 git remote add origin https://github.com/abioduog/rapidsms-project.git
 
+# Create main branch and switch to it
+git checkout -b main
+
 # Push to GitHub
 git push -u origin main
 
