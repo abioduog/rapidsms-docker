@@ -1,42 +1,100 @@
-# MyProject
+# RapidSMS Docker Setup
 
-This is a Django project configured with RapidSMS.
+This project sets up RapidSMS using Docker.
 
 ## Setup Instructions
 
-1. **Clone the Repository**:
-   ```sh
-   git clone https://github.com/abioduog/rapidsms-project.git
-   cd rapidsms-project
-   ```
+### Prerequisites
 
-2. **Create and Activate a Virtual Environment**:
-   ```sh
-   python3 -m venv venv
-   source venv/bin/activate
-   ```
+- [Docker](https://www.docker.com/products/docker-desktop)
+- [Docker Compose](https://docs.docker.com/compose/install/)
 
-3. **Install Dependencies**:
-   ```sh
-   pip install -r requirements.txt
-   ```
+### Step-by-Step Guide
 
-4. **Run Migrations**:
-   ```sh
-   cd myproject
-   python manage.py migrate
-   ```
+1. **Clone the repository:**
 
-5. **Create a Superuser**:
-   ```sh
-   python manage.py createsuperuser
-   ```
+    ```sh
+    git clone https://github.com/abioduog/rapidsms-docker.git
+    cd rapidsms-docker
+    ```
 
-6. **Run the Development Server**:
-   ```sh
-   python manage.py runserver
-   ```
+2. **Build and start the containers:**
 
-7. **Access the Application**:
-   Open a web browser and go to `http://127.0.0.1:8000/admin` to access the admin interface.
-   
+    ```sh
+    docker-compose up --build
+    ```
+
+3. **Apply migrations:**
+
+    ```sh
+    docker-compose run web python manage.py migrate
+    ```
+
+4. **Create a superuser:**
+
+    ```sh
+    docker-compose run web python manage.py createsuperuser
+    ```
+
+5. **Access the application:**
+
+    - RapidSMS Application: [http://localhost:8000](http://localhost:8000)
+    - Django Admin Interface: [http://localhost:8000/admin](http://localhost:8000/admin)
+
+### Project Structure
+
+rapidsms-docker/
+├── Dockerfile
+├── README.md
+├── docker-compose.yml
+├── manage.py
+├── myproject/
+│ ├── init.py
+│ ├── asgi.py
+│ ├── settings.py
+│ ├── urls.py
+│ └── wsgi.py
+├── requirements.txt
+├── setup_project.sh
+└── ...
+
+
+### Environment Variables
+
+Create a `.env` file in the root directory with the following content:
+
+```env
+SECRET_KEY=your_secret_key
+DEBUG=True
+DJANGO_ALLOWED_HOSTS=localhost 127.0.0.1 [::1]
+DATABASE_URL=postgres://rapidsms_user:secret@db:5432/rapidsms
+
+Additional Commands
+Stop containers:
+docker-compose down
+
+View logs:
+docker-compose logs
+
+Enter a running container:
+docker-compose exec web /bin/bash
+
+Troubleshooting
+If you encounter any issues, check the logs for more details:
+docker-compose logs web
+docker-compose logs db
+
+Contributing
+Feel free to submit issues or pull requests if you find any bugs or have new features to propose.
+
+License
+This project is licensed under the BSD License. See the LICENSE file for more details.
+
+### Step 8: Commit and Push the README
+
+Add the `README.md` to your Git repository and push it to GitHub:
+
+```sh
+git add README.md
+git commit -m "Add README with setup instructions"
+git push
