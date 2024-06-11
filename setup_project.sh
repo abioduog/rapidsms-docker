@@ -26,11 +26,12 @@ git add .
 # Commit changes
 git commit -m "Initial commit"
 
-# Add GitHub remote (replace with your repository URL)
+# Remove existing remote and add the correct remote
+git remote remove origin
 git remote add origin https://github.com/abioduog/rapidsms-project.git
 
 # Push to GitHub
-git push -u origin master
+git push -u origin main
 
 # Create README.md
 touch README.md
@@ -77,7 +78,7 @@ This is a Django project configured with RapidSMS.
 
 7. **Access the Application**:
    Open a web browser and go to \`http://127.0.0.1:8000/admin\` to access the admin interface.
-" > README.md
+   " > README.md
 
 # Add README.md to Git
 git add README.md
